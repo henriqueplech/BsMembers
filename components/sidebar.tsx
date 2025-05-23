@@ -79,7 +79,7 @@ export function Sidebar() {
       
       <div className="flex flex-col items-center pt-6">
         <Avatar className={cn(
-          "border-4 border-green-500 transition-all",
+          "border-4 border-[#006653] transition-all",
           collapsed ? "h-10 w-10" : "h-24 w-24"
         )}>
           <AvatarImage src={currentUser.image} alt={currentUser.name} />
@@ -125,7 +125,7 @@ export function Sidebar() {
               </div>
             )}
             <div className={cn(
-              "rounded-full bg-green-500 px-2 py-0.5 text-xs font-medium text-white",
+              "rounded-full bg-green-500 px-2 py-0.5 text-xs font-medium text-[#00E57C]",
               collapsed && "mt-1"
             )}>
               {usuariosAtuais}
@@ -133,15 +133,15 @@ export function Sidebar() {
           </div>
           
           {!collapsed && (
-            <div className="mt-2">
-              <Progress value={porcentagem} className="h-1.5" />
+            <div className="mt-2 ">
+              <Progress value={porcentagem} className="h-1.5 " />
             </div>
           )}
         </div>
       </div>
       
       <div className={cn(
-        "flex-1 overflow-auto px-3 py-4",
+        "flex-1 overflow-auto px-3 py-4 bg-color-[#00E57C]",
         collapsed && "flex flex-col items-center"
       )}>
         <nav className="grid gap-1">

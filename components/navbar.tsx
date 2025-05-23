@@ -12,7 +12,7 @@ export function Navbar() {
     <div className="flex h-16 items-center justify-between border-b px-4 md:px-6">
       <div className="flex items-center gap-4 lg:gap-6">
         <h1 className="text-xl font-bold">
-          <span className="inline-flex items-center gap-2 bg-green-500 p-1 px-2 text-white">
+          <span className="inline-flex items-center gap-2 bg-[#00AA66] rounded-sm p-1 px-2 text-white">
             <span className="block h-4 w-4 rounded-sm bg-white" />
             BS MEMBERS
           </span>
