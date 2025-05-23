@@ -17,7 +17,7 @@ export function RevenueChart({ data }: RevenueChartProps) {
           <CardTitle className="text-base">Total Movimentado</CardTitle>
           <CardDescription className="flex space-x-2">
             <span className="flex items-center text-xs text-muted-foreground">
-              <span className="mr-1 h-2 w-2 rounded-full bg-green-500" />
+              <span className="mr-1 h-2 w-2 rounded-full bg-[#006C41]" />
               Total arrecadado
             </span>
             <span className="flex items-center text-xs text-muted-foreground">
@@ -27,7 +27,7 @@ export function RevenueChart({ data }: RevenueChartProps) {
           </CardDescription>
         </div>
         <div className="ml-auto">
-          <Button size="sm" variant="outline" className="h-8 bg-green-500 text-white hover:bg-green-600">
+          <Button size="sm" variant="outline" className="h-8 bg-[#006653] text-white hover:bg-[#00E57C]">
             Últimos 15 dias
           </Button>
         </div>

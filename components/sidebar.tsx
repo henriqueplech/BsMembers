@@ -70,7 +70,7 @@ export function Sidebar() {
       
       <div className="flex flex-col items-center pt-6">
         <Avatar className={cn(
-          "border-4 border-green-500 transition-all",
+          "border-4 border-[#006653] transition-all",
           collapsed ? "h-10 w-10" : "h-24 w-24"
         )}>
           <AvatarImage src={currentUser.image} alt={currentUser.name} />

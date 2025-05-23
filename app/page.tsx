@@ -34,7 +34,7 @@ export default function Dashboard() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-9 gap-1 text-green-500"
+                    className="h-9 gap-1 text-[#006C41]"
                   >
                     <Download className="h-4 w-4" />
                     Baixar relatório
@@ -42,7 +42,7 @@ export default function Dashboard() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-9 gap-1 text-green-500"
+                    className="h-9 gap-1 text-[#00AA66]"
                   >
                     <RefreshCcw className="h-4 w-4" />
                     Atualizar
