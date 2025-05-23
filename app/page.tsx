@@ -1,4 +1,11 @@
 import { Metadata } from "next";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  RefreshCw, // Corrigido de RefreshCcw para RefreshCw (padrão da lucide)
+} from "lucide-react";
+
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 import { StatCard } from "@/components/stat-card";
@@ -6,7 +13,6 @@ import { RevenueChart } from "@/components/revenue-chart";
 import { TrainingCard } from "@/components/training-card";
 import { Button } from "@/components/ui/button";
 import { stats, chartData, trainings } from "@/lib/data";
-import { ChevronLeft, ChevronRight, Download, RefreshCcw } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Dashboard | BS Members",
@@ -27,24 +33,17 @@ export default function Dashboard() {
                 <div>
                   <h1 className="text-2xl font-bold">Bem vindo, Lucas!</h1>
                   <p className="text-sm text-muted-foreground">
-                    Aqui ficam todas estatísticas da sua conta!
+                    Aqui ficam suas estatísticas da sua conta!
                   </p>
                 </div>
-                <div className="mt-4 flex gap-2 sm:mt-0">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-9 gap-1 text-green-500"
-                  >
-                    <Download className="h-4 w-4" />
+                <div className="mt-4 flex items-center gap-2 sm:mt-0">
+                  <Button variant="outline" size="sm">
+                    <Download className="mr-2 h-4 w-4" />
                     Baixar relatório
                   </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-9 gap-1 text-green-500"
-                  >
-                    <RefreshCcw className="h-4 w-4" />
+                  {/* Botão "Atualizar" agora com o estilo padrão (preenchido) */}
+                  <Button size="sm">
+                    <RefreshCw className="mr-2 h-4 w-4" />
                     Atualizar
                   </Button>
                 </div>

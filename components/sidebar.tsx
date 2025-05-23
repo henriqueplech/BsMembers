@@ -20,15 +20,19 @@ import {
 } from "lucide-react"
 import { Button } from "./ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { Progress } from "./ui/progress"
 
+// PASSO 1: Preparar o NavItem para receber a informação "collapsed"
 interface NavItemProps {
   href: string
   icon: React.ReactNode
   label: string
   active?: boolean
+  collapsed: boolean // Adicionado aqui
 }
 
-function NavItem({ href, icon, label, active }: NavItemProps) {
+// PASSO 2: Receber a propriedade "collapsed" na função
+function NavItem({ href, icon, label, active, collapsed }: NavItemProps) {
   return (
     <Link
       href={href}
@@ -38,10 +42,15 @@ function NavItem({ href, icon, label, active }: NavItemProps) {
       )}
     >
       {icon}
-      <span>{label}</span>
+      {/* Agora 'collapsed' existe aqui e a lógica funciona! */}
+      {!collapsed && <span>{label}</span>}
     </Link>
   )
 }
+
+const usuariosAtuais = 826;
+const metaDeUsuarios = 1500;
+const porcentagem = (usuariosAtuais / metaDeUsuarios) * 100;
 
 export function Sidebar() {
   const pathname = usePathname()
@@ -49,8 +58,8 @@ export function Sidebar() {
   
   return (
     <div className={cn(
-      "relative flex flex-col border-r bg-card transition-all",
-      collapsed ? "w-[80px]" : "w-[270px]"
+      "relative hidden md:flex flex-col border-r bg-card transition-all",
+      collapsed ? "w-[80px]" : "w-[320px]"
     )}>
       <div className="absolute right-[-12px] top-4 z-10">
         <Button
@@ -103,20 +112,31 @@ export function Sidebar() {
         )}
         
         <div className={cn(
-          "flex",
-          collapsed ? "justify-center" : "justify-between"
+          "flex flex-col",
+          collapsed ? "items-center" : "items-stretch"
         )}>
+          <div className={cn(
+            "flex",
+            collapsed ? "justify-center" : "justify-between"
+          )}>
+            {!collapsed && (
+              <div className="text-xs text-muted-foreground">
+                Usuários nos Treinamentos
+              </div>
+            )}
+            <div className={cn(
+              "rounded-full bg-green-500 px-2 py-0.5 text-xs font-medium text-white",
+              collapsed && "mt-1"
+            )}>
+              {usuariosAtuais}
+            </div>
+          </div>
+          
           {!collapsed && (
-            <div className="text-xs text-muted-foreground">
-              Usuários nos Treinamentos
+            <div className="mt-2">
+              <Progress value={porcentagem} className="h-1.5" />
             </div>
           )}
-          <div className={cn(
-            "rounded-full bg-green-500 px-2 py-0.5 text-xs font-medium text-white",
-            collapsed && "mt-1"
-          )}>
-            826
-          </div>
         </div>
       </div>
       
@@ -125,54 +145,15 @@ export function Sidebar() {
         collapsed && "flex flex-col items-center"
       )}>
         <nav className="grid gap-1">
-          <NavItem
-            href="/"
-            icon={<Home className="h-5 w-5" />}
-            label="Início"
-            active={pathname === '/'}
-          />
-          <NavItem
-            href="/trainings"
-            icon={<Layers className="h-5 w-5" />}
-            label="Meus treinamentos"
-            active={pathname === '/trainings'}
-          />
-          <NavItem
-            href="/reports"
-            icon={<BarChart className="h-5 w-5" />}
-            label="Relatório"
-            active={pathname === '/reports'}
-          />
-          <NavItem
-            href="/invoices"
-            icon={<FileText className="h-5 w-5" />}
-            label="Faturas"
-            active={pathname === '/invoices'}
-          />
-          <NavItem
-            href="/subscription"
-            icon={<CreditCard className="h-5 w-5" />}
-            label="Assinaturas"
-            active={pathname === '/subscription'}
-          />
-          <NavItem
-            href="/integrations"
-            icon={<Settings className="h-5 w-5" />}
-            label="Integrações"
-            active={pathname === '/integrations'}
-          />
-          <NavItem
-            href="/templates"
-            icon={<ClipboardList className="h-5 w-5" />}
-            label="Templates"
-            active={pathname === '/templates'}
-          />
-          <NavItem
-            href="/support"
-            icon={<HelpCircle className="h-5 w-5" />}
-            label="Suporte"
-            active={pathname === '/support'}
-          />
+          {/* PASSO 3: Passar a propriedade 'collapsed' para cada NavItem */}
+          <NavItem href="/" icon={<Home className="h-5 w-5" />} label="Início" active={pathname === '/'} collapsed={collapsed} />
+          <NavItem href="/trainings" icon={<Layers className="h-5 w-5" />} label="Meus treinamentos" active={pathname === '/trainings'} collapsed={collapsed} />
+          <NavItem href="/reports" icon={<BarChart className="h-5 w-5" />} label="Relatório" active={pathname === '/reports'} collapsed={collapsed} />
+          <NavItem href="/invoices" icon={<FileText className="h-5 w-5" />} label="Faturas" active={pathname === '/invoices'} collapsed={collapsed} />
+          <NavItem href="/subscription" icon={<CreditCard className="h-5 w-5" />} label="Assinaturas" active={pathname === '/subscription'} collapsed={collapsed} />
+          <NavItem href="/integrations" icon={<Settings className="h-5 w-5" />} label="Integrações" active={pathname === '/integrations'} collapsed={collapsed} />
+          <NavItem href="/templates" icon={<ClipboardList className="h-5 w-5" />} label="Templates" active={pathname === '/templates'} collapsed={collapsed} />
+          <NavItem href="/support" icon={<HelpCircle className="h-5 w-5" />} label="Suporte" active={pathname === '/support'} collapsed={collapsed} />
         </nav>
       </div>
       

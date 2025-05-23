@@ -1,9 +1,11 @@
 "use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
+import { Progress } from "@/components/ui/progress"; 
 import { Button } from "./ui/button"
 import { ChartData } from "@/lib/data"
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts"
+// ALTERAÇÃO 1: Adicionando 'defs' e 'linearGradient' à importação
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, defs, linearGradient } from "recharts"
 
 interface RevenueChartProps {
   data: ChartData[]
@@ -17,6 +19,7 @@ export function RevenueChart({ data }: RevenueChartProps) {
           <CardTitle className="text-base">Total Movimentado</CardTitle>
           <CardDescription className="flex space-x-2">
             <span className="flex items-center text-xs text-muted-foreground">
+              {/* O ideal seria este span usar o gradiente também, mas mantendo a modificação mínima */}
               <span className="mr-1 h-2 w-2 rounded-full bg-green-500" />
               Total arrecadado
             </span>
@@ -36,6 +39,15 @@ export function RevenueChart({ data }: RevenueChartProps) {
         <div className="h-[200px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={data} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+              
+              {/* ALTERAÇÃO 2: Bloco que define o gradiente vertical */}
+              <defs>
+                <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#006653" />
+                  <stop offset="100%" stopColor="#00E57C" />
+                </linearGradient>
+              </defs>
+
               <XAxis 
                 dataKey="date" 
                 axisLine={false}
@@ -61,7 +73,8 @@ export function RevenueChart({ data }: RevenueChartProps) {
               />
               <Bar 
                 dataKey="amount" 
-                fill="hsl(var(--chart-1))" 
+                // ALTERAÇÃO 3: Usando o gradiente 'barGradient' como preenchimento
+                fill="url(#barGradient)" 
                 radius={[4, 4, 0, 0]} 
                 maxBarSize={24}
               />
