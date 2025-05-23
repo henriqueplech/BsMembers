@@ -1,4 +1,7 @@
 import { Metadata } from "next";
+
+import { Input } from "@/components/ui/input";
+import { Search, Bell, User } from "lucide-react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -29,6 +32,14 @@ export default function Dashboard() {
           <div className="container mx-auto p-4 md:p-6 lg:p-8">
             {/* Header */}
             <div className="mb-8">
+              <div className="hidden md:flex justify-end gap-2 ">
+                  <Input
+                    className="pl-8 md:w-[300px] lg:w-[400px]"
+                    placeholder="Pesquisar..."
+                  />
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Button variant="default" size="icon" className="rounded-lg" color="[#00AA66]"/>
+              </div>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <h1 className="text-2xl font-bold">Bem vindo, Lucas!</h1>
@@ -36,6 +47,7 @@ export default function Dashboard() {
                     Aqui ficam suas estatísticas da sua conta!
                   </p>
                 </div>
+
                 <div className="mt-4 flex items-center gap-2 sm:mt-0">
                   <Button variant="outline" size="sm">
                     <Download className="mr-2 h-4 w-4" />

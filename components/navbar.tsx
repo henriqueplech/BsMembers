@@ -17,15 +17,7 @@ export function Navbar() {
             BS MEMBERS
           </span>
         </h1>
-        <div className="hidden md:flex md:flex-1">
-          <div className="relative flex w-full max-w-md">
-            <Input
-              className="pl-8 md:w-[300px] lg:w-[400px]"
-              placeholder="Pesquisar..."
-            />
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          </div>
-        </div>
+       
       </div>
       <div className="flex items-center gap-2">
         <ThemeToggle />
