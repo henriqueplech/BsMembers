@@ -22,16 +22,16 @@ import { Button } from "./ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { Progress } from "./ui/progress"
 
-// PASSO 1: Preparar o NavItem para receber a informação "collapsed"
+// Interface NavItem (sem alterações)
 interface NavItemProps {
   href: string
   icon: React.ReactNode
   label: string
   active?: boolean
-  collapsed: boolean // Adicionado aqui
+  collapsed: boolean
 }
 
-// PASSO 2: Receber a propriedade "collapsed" na função
+// Componente NavItem (sem alterações)
 function NavItem({ href, icon, label, active, collapsed }: NavItemProps) {
   return (
     <Link
@@ -42,15 +42,21 @@ function NavItem({ href, icon, label, active, collapsed }: NavItemProps) {
       )}
     >
       {icon}
-      {/* Agora 'collapsed' existe aqui e a lógica funciona! */}
       {!collapsed && <span>{label}</span>}
     </Link>
   )
 }
 
+// Lógica de cálculo de porcentagem (sem alterações)
 const usuariosAtuais = 826;
 const metaDeUsuarios = 1500;
-const porcentagem = (usuariosAtuais / metaDeUsuarios) * 100;
+const porcentagemUsuarios = (usuariosAtuais / metaDeUsuarios) * 100;
+
+// Exemplo de dados para "Treinamentos criados"
+const treinamentosCriados = 18;
+const metaDeTreinamentos = 40;
+const porcentagemTreinamentos = (treinamentosCriados / metaDeTreinamentos) * 100;
+
 
 export function Sidebar() {
   const pathname = usePathname()
@@ -77,6 +83,7 @@ export function Sidebar() {
         </Button>
       </div>
       
+      {/* Seção do Avatar (sem alterações) */}
       <div className="flex flex-col items-center pt-6">
         <Avatar className={cn(
           "border-4 border-[#006653] transition-all",
@@ -96,70 +103,67 @@ export function Sidebar() {
         )}
       </div>
       
-      <div className={cn(
-        "mt-4 border-t border-b py-2",
-        collapsed ? "px-2" : "px-4"
-      )}>
-        {!collapsed && (
-          <div className="mb-2 flex items-center justify-between py-1">
-            <span className="text-xs font-medium uppercase text-muted-foreground">
+      {/* ================================================================== */}
+      {/* =========== INÍCIO DA SEÇÃO ATUALIZADA =========================== */}
+      {/* ================================================================== */}
+
+      {/* Exibimos a seção de estatísticas apenas quando a sidebar não está colapsada */}
+      {!collapsed && (
+        <div className="mt-6 space-y-5 px-4">
+          
+          {/* Item 1: Treinamentos Criados - Agora com a mesma estrutura e gradiente */}
+          <div className="flex flex-col space-y-2">
+            <span className="text-sm font-medium text-primary">
               Treinamentos criados
             </span>
-            <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium">
-              18
+            <Progress 
+              value={porcentagemTreinamentos} 
+              className="h-2 bg-muted" 
+              indicatorClassName="bg-gradient-to-r from-[#006653] to-[#00E57C]"
+            />
+          </div>
+
+          {/* Item 2: Usuários nos Treinamentos - Estrutura simplificada com gradiente */}
+          <div className="flex flex-col space-y-2">
+            <span className="text-sm font-medium text-primary">
+              Usuários nos Treinamentos
             </span>
+            <Progress 
+              value={porcentagemUsuarios} 
+              className="h-2 bg-muted" 
+              indicatorClassName="bg-gradient-to-r from-[#006653] to-[#00E57C]"
+            />
           </div>
-        )}
-        
-        <div className={cn(
-          "flex flex-col",
-          collapsed ? "items-center" : "items-stretch"
-        )}>
-          <div className={cn(
-            "flex",
-            collapsed ? "justify-center" : "justify-between"
-          )}>
-            {!collapsed && (
-              <div className="text-xs text-muted-foreground">
-                Usuários nos Treinamentos
-              </div>
-            )}
-            <div className={cn(
-              "rounded-full bg-green-500 px-2 py-0.5 text-xs font-medium text-[#00E57C]",
-              collapsed && "mt-1"
-            )}>
-              {usuariosAtuais}
-            </div>
-          </div>
-          
-          {!collapsed && (
-            <div className="mt-2 ">
-              <Progress value={porcentagem} className="h-1.5 " />
-            </div>
-          )}
+
         </div>
-      </div>
+      )}
       
+      {/* ================================================================== */}
+      {/* =========== FIM DA SEÇÃO ATUALIZADA =============================== */}
+      {/* ================================================================== */}
+      
+      {/* Navegação Principal (sem alterações) */}
       <div className={cn(
-        "flex-1 overflow-auto px-3 py-4 bg-color-[#00E57C]",
-        collapsed && "flex flex-col items-center"
+        "flex-1 overflow-auto py-4",
+        collapsed ? "px-2" : "px-3",
+        !collapsed && "mt-4" // Adiciona um espaçamento quando expandido
       )}>
         <nav className="grid gap-1">
-          {/* PASSO 3: Passar a propriedade 'collapsed' para cada NavItem */}
           <NavItem href="/" icon={<Home className="h-5 w-5" />} label="Início" active={pathname === '/'} collapsed={collapsed} />
           <NavItem href="/trainings" icon={<Layers className="h-5 w-5" />} label="Meus treinamentos" active={pathname === '/trainings'} collapsed={collapsed} />
-          <NavItem href="/reports" icon={<BarChart className="h-5 w-5" />} label="Relatório" active={pathname === '/reports'} collapsed={collapsed} />
           <NavItem href="/invoices" icon={<FileText className="h-5 w-5" />} label="Faturas" active={pathname === '/invoices'} collapsed={collapsed} />
           <NavItem href="/subscription" icon={<CreditCard className="h-5 w-5" />} label="Assinaturas" active={pathname === '/subscription'} collapsed={collapsed} />
           <NavItem href="/integrations" icon={<Settings className="h-5 w-5" />} label="Integrações" active={pathname === '/integrations'} collapsed={collapsed} />
+          <NavItem href="/reports" icon={<BarChart className="h-5 w-5" />} label="Relatório" active={pathname === '/reports'} collapsed={collapsed} />
           <NavItem href="/templates" icon={<ClipboardList className="h-5 w-5" />} label="Templates" active={pathname === '/templates'} collapsed={collapsed} />
           <NavItem href="/support" icon={<HelpCircle className="h-5 w-5" />} label="Suporte" active={pathname === '/support'} collapsed={collapsed} />
         </nav>
       </div>
       
+      {/* Botão Sair (sem alterações) */}
       <div className="mt-auto border-t p-4">
-        <Button variant="ghost" className="w-full justify-start text-destructive">
-          <LogOut className="mr-2 h-5 w-5" />
+        <Button variant="ghost" className={cn("w-full text-destructive", collapsed ? "justify-center" : "justify-start")}>
+          <LogOut className={cn(!collapsed && "mr-2", "h-5 w-5")} />
           {!collapsed && <span>Sair</span>}
         </Button>
       </div>
