@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "./ui/button"
 import { ChartData } from "@/lib/data"
 // ALTERAÇÃO 1: Adicionando 'defs' e 'linearGradient' à importação
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, defs, linearGradient } from "recharts"
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer  } from "recharts"
 
 interface RevenueChartProps {
   data: ChartData[]
