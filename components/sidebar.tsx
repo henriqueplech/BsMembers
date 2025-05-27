@@ -87,7 +87,7 @@ export function Sidebar() {
       <div className="flex flex-col items-center pt-6">
         <Avatar className={cn(
           "border-4 border-[#006653] transition-all",
-          collapsed ? "h-10 w-10" : "h-24 w-24"
+          collapsed ? "h-16 w-16" : "h-36 w-36"
         )}>
           <AvatarImage src={currentUser.image} alt={currentUser.name} />
           <AvatarFallback>{currentUser.name.charAt(0)}</AvatarFallback>
@@ -109,7 +109,7 @@ export function Sidebar() {
 
       {/* Exibimos a seção de estatísticas apenas quando a sidebar não está colapsada */}
       {!collapsed && (
-        <div className="mt-6 space-y-5 px-4">
+        <div className="mt-6 space-y-8 px-4">
           
           {/* Item 1: Treinamentos Criados - Agora com a mesma estrutura e gradiente */}
           <div className="flex flex-col space-y-2">
@@ -118,19 +118,19 @@ export function Sidebar() {
             </span>
             <Progress 
               value={porcentagemTreinamentos} 
-              className="h-2 bg-muted" 
+              className="h-3 bg-muted rounded-md" 
               indicatorClassName="bg-gradient-to-r from-[#006653] to-[#00E57C]"
             />
           </div>
 
           {/* Item 2: Usuários nos Treinamentos - Estrutura simplificada com gradiente */}
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 rounded-md">
             <span className="text-sm font-medium text-primary">
               Usuários nos Treinamentos
             </span>
             <Progress 
               value={porcentagemUsuarios} 
-              className="h-2 bg-muted" 
+              className="h-3 bg-muted rounded-md" 
               indicatorClassName="bg-gradient-to-r from-[#006653] to-[#00E57C]"
             />
           </div>
@@ -149,21 +149,21 @@ export function Sidebar() {
         !collapsed && "mt-4" // Adiciona um espaçamento quando expandido
       )}>
         <nav className="grid gap-1">
-          <NavItem href="/" icon={<Home className="h-5 w-5" />} label="Início" active={pathname === '/'} collapsed={collapsed} />
-          <NavItem href="/trainings" icon={<Layers className="h-5 w-5" />} label="Meus treinamentos" active={pathname === '/trainings'} collapsed={collapsed} />
-          <NavItem href="/invoices" icon={<FileText className="h-5 w-5" />} label="Faturas" active={pathname === '/invoices'} collapsed={collapsed} />
-          <NavItem href="/subscription" icon={<CreditCard className="h-5 w-5" />} label="Assinaturas" active={pathname === '/subscription'} collapsed={collapsed} />
-          <NavItem href="/integrations" icon={<Settings className="h-5 w-5" />} label="Integrações" active={pathname === '/integrations'} collapsed={collapsed} />
-          <NavItem href="/reports" icon={<BarChart className="h-5 w-5" />} label="Relatório" active={pathname === '/reports'} collapsed={collapsed} />
-          <NavItem href="/templates" icon={<ClipboardList className="h-5 w-5" />} label="Templates" active={pathname === '/templates'} collapsed={collapsed} />
-          <NavItem href="/support" icon={<HelpCircle className="h-5 w-5" />} label="Suporte" active={pathname === '/support'} collapsed={collapsed} />
+          <NavItem href="/" icon={<Home className="h-8 w-8" />} label="Início" active={pathname === '/'} collapsed={collapsed} />
+          <NavItem href="/trainings" icon={<Layers className="h-8 w-8" />} label="Meus treinamentos" active={pathname === '/trainings'} collapsed={collapsed} />
+          <NavItem href="/invoices" icon={<FileText className="h-8 w-8" />} label="Faturas" active={pathname === '/invoices'} collapsed={collapsed} />
+          <NavItem href="/subscription" icon={<CreditCard className="h-8 w-8" />} label="Assinaturas" active={pathname === '/subscription'} collapsed={collapsed} />
+          <NavItem href="/integrations" icon={<Settings className="h-8 w-8" />} label="Integrações" active={pathname === '/integrations'} collapsed={collapsed} />
+          <NavItem href="/reports" icon={<BarChart className="h-8 w-8" />} label="Relatório" active={pathname === '/reports'} collapsed={collapsed} />
+          <NavItem href="/templates" icon={<ClipboardList className="h-8 w-8" />} label="Templates" active={pathname === '/templates'} collapsed={collapsed} />
+          <NavItem href="/support" icon={<HelpCircle className="h-8 w-8" />} label="Suporte" active={pathname === '/support'} collapsed={collapsed} />
         </nav>
       </div>
       
       {/* Botão Sair (sem alterações) */}
       <div className="mt-auto border-t p-4">
         <Button variant="ghost" className={cn("w-full text-destructive", collapsed ? "justify-center" : "justify-start")}>
-          <LogOut className={cn(!collapsed && "mr-2", "h-5 w-5")} />
+          <LogOut className={cn(!collapsed && "mr-2", "h-8 w-8")} />
           {!collapsed && <span>Sair</span>}
         </Button>
       </div>
