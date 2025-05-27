@@ -30,7 +30,7 @@ export function RevenueChart({ data }: RevenueChartProps) {
           </CardDescription>
         </div>
         <div className="ml-auto">
-          <Button size="sm" variant="outline" className="h-8 bg-green-500 text-white hover:bg-green-600">
+          <Button size="sm" variant="success" className="h-8 bg-green-500 text-white hover:bg-green-600">
             Últimos 15 dias
           </Button>
         </div>
@@ -64,7 +64,7 @@ export function RevenueChart({ data }: RevenueChartProps) {
                   backgroundColor: 'rgba(0, 0, 0, 0.8)', 
                   border: 'none',
                   borderRadius: '4px',
-                  color: 'white',
+                  color: '[#00E57C]',
                   fontSize: '12px',
                   padding: '8px'
                 }}
