@@ -1,20 +1,23 @@
-import { Metadata } from "next";
+// app/dashboard/page.tsx (ou onde quer que seu arquivo esteja)
 
-import { Input } from "@/components/ui/input";
-import { Search, Bell, User } from "lucide-react";
+import { Metadata } from "next";
 import {
   ChevronLeft,
   ChevronRight,
   Download,
-  RefreshCw, // Corrigido de RefreshCcw para RefreshCw (padrão da lucide)
+  RefreshCw,
+  Search,
+  Bell,
+  User,
 } from "lucide-react";
 
-import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 import { StatCard } from "@/components/stat-card";
 import { RevenueChart } from "@/components/revenue-chart";
 import { TrainingCard } from "@/components/training-card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ThemeToggle } from "@/components/theme-toggle"; // Importe o ThemeToggle
 import { stats, chartData, trainings } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -24,42 +27,57 @@ export const metadata: Metadata = {
 
 export default function Dashboard() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      <div className="flex flex-1">
-        <Sidebar />
-        <main className="flex-1 overflow-auto">
-          <div className="container mx-auto p-4 md:p-6 lg:p-8">
-            {/* Header */}
-            <div className="mb-8">
-              <div className="hidden md:flex justify-end gap-2 ">
-                  <Input
-                    className="pl-8 md:w-[300px] lg:w-[400px]"
-                    placeholder="Pesquisar..."
-                  />
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Button variant="default" size="icon" className="rounded-lg" color="[#00AA66]"/>
-              </div>
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h1 className="text-2xl font-bold">Bem vindo, Lucas!</h1>
-                  <p className="text-sm text-muted-foreground">
-                    Aqui ficam suas estatísticas da sua conta!
-                  </p>
-                </div>
+    // A estrutura principal agora é apenas o flex container
+    <div className="flex min-h-screen bg-zinc-900 text-white">
+      <Sidebar />
+      <main className="flex-1 p-6 md:p-8">
+        {/* CABEÇALHO DA PÁGINA PRINCIPAL */}
+        <header className="flex items-center justify-between pb-6 border-b border-zinc-800">
+          {/* Saudação (Movida para aqui, mas no design está abaixo) */}
+          <div>
+            <h1 className="text-2xl font-bold">Bem vindo, Lucas!</h1>
+            <p className="text-sm text-zinc-400">
+              Aqui ficam suas estatísticas da sua conta!
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            {/* Barra de Pesquisa */}
+            <div className="relative hidden md:block">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-400" />
+              <Input
+                type="search"
+                placeholder="Pesquisar..."
+                className="h-9 w-64 rounded-md border-0 bg-zinc-800 pl-9 text-sm text-zinc-50 placeholder:text-zinc-400 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-emerald-500"
+              />
+            </div>
+            
+            {/* Ícones de Ação */}
+            <div className="flex items-center gap-1">
+                <ThemeToggle />
+                <Button variant="ghost" size="icon" className="rounded-full text-zinc-400 hover:bg-zinc-800 hover:text-white">
+                  <Bell className="h-5 w-5" />
+                </Button>
+                <Button variant="ghost" size="icon" className="rounded-full text-zinc-400 hover:bg-zinc-800 hover:text-white">
+                  <User className="h-5 w-5" />
+                </Button>
+            </div>
+          </div>
+        </header>
 
-                <div className="mt-4 flex items-center gap-2 sm:mt-0">
-                  <Button variant="outline" size="sm">
+        {/* CONTEÚDO DA PÁGINA */}
+        <div className="mt-6">
+            {/* Botões de Ação (Abaixo do cabeçalho) */}
+            <div className="flex justify-end items-center gap-2 mb-6">
+                <Button variant="outline" size="sm" className="bg-transparent border-zinc-700 hover:bg-zinc-800">
                     <Download className="mr-2 h-4 w-4" />
                     Baixar relatório
-                  </Button>
-                  {/* Botão "Atualizar" agora com o estilo padrão (preenchido) */}
-                  <Button size="sm">
+                </Button>
+                {/* Botão "Atualizar" com a cor da marca */}
+                <Button size="sm" className="bg-[#00AA66] text-white hover:bg-[#00995c]">
                     <RefreshCw className="mr-2 h-4 w-4" />
                     Atualizar
-                  </Button>
-                </div>
-              </div>
+                </Button>
             </div>
 
             {/* Stats Grid */}
@@ -88,10 +106,10 @@ export default function Dashboard() {
                   Treinamentos Populares
                 </h2>
                 <div className="flex gap-1">
-                  <Button variant="ghost" size="icon" className="rounded-full">
+                  <Button variant="ghost" size="icon" className="rounded-full hover:bg-zinc-800">
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="rounded-full">
+                  <Button variant="ghost" size="icon" className="rounded-full hover:bg-zinc-800">
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
@@ -102,9 +120,8 @@ export default function Dashboard() {
                 ))}
               </div>
             </div>
-          </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }
